@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+    />
+
+    <title>TailwindCSS on Rails</title>
+
+    <link rel="stylesheet" href="dist/reset.css" />
+    <link rel="stylesheet" href="dist/reveal.css" />
+    <link rel="stylesheet" href="dist/theme/white.css" id="theme" />
+
+    <!-- Theme used for syntax highlighted code -->
+    <link rel="stylesheet" href="plugin/highlight/monokai.css" id="highlight-theme" />
+  </head>
+  <body>
+    <div class="reveal">
+      <div class="slides">
+        <!-- Home slide -->
+        <section>
+          TailwindCSS on Rails
+          <div class="image-container">
+            <img src="/images/tailwind_logo.png" alt="tailwind_logo" class="homepage_img" />
+            <img src="/images/plus_icon.png" alt="plus_icon" class="home_page_plus" />
+            <img src="/images/ruby_on_rails.png" alt="rails_logo" class="homepage_img" />
+          </div>
+        </section>
+
+        <!-- What is Tailwind? -->
+        <section>
+          <section>What is TailwindCSS?</section>
+
+          <section>
+            <p>According to the docs:</p>
+            <div>
+              <div class="definition-background">Something</div>
+              <div class="definition">
+                <p class="definition-text">
+                  "A utility-first CSS framework packed with classes that can be composed to build
+                  any design, directly in your markup."
+                </p>
+              </div>
+            </div>
+          </section>
+
+          <section>
+            What does that mean?
+            <p>🤔</p>
+          </section>
+
+          <section>
+            <p>
+              <a href="https://tailwindcss.com/docs/utility-first" target="_blank">Examples</a>
+            </p>
+          </section>
+        </section>
+
+        <!-- Comparisons to other libraries -->
+        <section>
+          <section>
+            <p>How is this different than Bootstrap?</p>
+            <img src="/images/bootstrap_logo.png" alt="bootstrap_logo" class="bootstrap-logo" />
+          </section>
+
+          <section>
+            <p>TailwindCSS operates on a lower level than some other CSS component frameworks</p>
+            <div class="css-frameworks-container">
+              <img src="/images/ant-design-small.svg" alt="ant-design-small" />
+              <img src="/images/bootstrap-small.png" alt="bootstrap-small" />
+              <img src="/images/bulma-small.png" alt="bulma-small" />
+              <img src="/images/materialize-css-small.png" alt="materialize-css-small" />
+              <img src="/images/semantic-ui-small.png" alt="semantic-ui-small" />
+            </div>
+          </section>
+
+          <section>
+            <p>Each Tailwind utility class does one thing and one thing only.</p>
+            <pre class="css"><code data-trim>
+              /* Only handles padding-top */
+              .pt-4 {
+                padding-top: 1rem;
+              }
+
+              /* Only handles setting the display to flex */
+              .flex {
+                display: flex;
+              }
+            </code></pre>
+          </section>
+
+          <section>
+            <p>Where as with Bootstrap, one button class:</p>
+            <pre class="css"><code data-trim>
+              .btn {
+                display: inline-block;
+                font-weight: 400;
+                line-height: 1.5;
+                color: #212529;
+                text-align: center;
+                text-decoration: none;
+                vertical-align: middle;
+                cursor: pointer;
+                -webkit-user-select: none;
+                -moz-user-select: none;
+                user-select: none;
+                background-color: transparent;
+                border: 1px solid transparent;
+                padding: 0.375rem 0.75rem;
+                font-size: 1rem;
+                border-radius: 0.25rem;
+                transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+              }
+              @media (prefers-reduced-motion: reduce) {
+                .btn {
+                  transition: none;
+                }
+              }
+              .btn:hover {
+                color: #212529;
+              }
+              .btn-check:focus + .btn, .btn:focus {
+                outline: 0;
+                box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
+              }
+              .btn:disabled, .btn.disabled, fieldset:disabled .btn {
+                pointer-events: none;
+                opacity: 0.65;
+              }
+            </code></pre>
+            <small
+              ><a
+                href="https://github.com/twbs/bootstrap/blob/548be2ed6604ddfc8488cd4a793c6271c2caf485/dist/css/bootstrap.css#L2875-L2909"
+                target="_blank"
+                >Bootstrap Source Code</a
+              ></small
+            >
+          </section>
+
+          <section>
+            <p class="fragment fade-out">
+              Bootstrap is fine but if you ever want to start implementing your own distinct styles,
+              or custom CSS, you would have to override most of those properties.
+            </p>
+            <div class="fragment fade-up">
+              <p>🤺 🥵</p>
+              Which can easily lead to fighting default Bootstrap styles
+            </div>
+          </section>
+
+          <section>
+            <p>Neat! But how do I know if I should use Tailwind in my project?</p>
+            <img src="/images/thinking-batman.gif" alt="thinking-batman" class="gif" />
+          </section>
+
+          <section>
+            <p>Some reasons to maybe use Tailwind</p>
+            <a href="http://tailwindcss.com/" target="_blank" rel="noopener noreferrer">Reasons</a>
+          </section>
+
+          <section>
+            <p>Some reasons why Tailwind might not be the best choice for your project</p>
+          </section>
+
+          <section>
+            <p class="fragment">You are still developing CSS foundational knowledge</p>
+            <p class="fragment">
+              You are not wanting to introduce complexity in dealing with PostCSS config
+            </p>
+            <p class="fragment">
+              You prefer more "Separation of Concerns" between your markup and CSS
+            </p>
+            <p class="fragment">You prefer not having to learn the Tailwind CSS class names</p>
+            <p class="fragment">You can't stand how the HTML looks with all of those classes</p>
+          </section>
+        </section>
+
+        <!-- Installation process -->
+        <section>
+          <section>
+            <p>Okay, so how do we install it in Rails?</p>
+            <a href="https://tailwindcss.com/docs/installation" target="_blank"
+              >Tailwind Install Docs</a
+            >
+          </section>
+
+          <section>
+            <p class="fragment" style="font-size: 2rem">First, let's create a fresh Rails app</p>
+            <pre class="bash fragment"><code data-trim>
+              $ rails new tailwind_app -T --database=postgresql
+              $ cd tailwind_2
+            </code></pre>
+          </section>
+
+          <section>
+            <p class="fragment" style="font-size: 2rem">
+              Next, we'll install Tailwind and its dependencies. Here's where we will split from the
+              docs and use a slightly older version of PostCSS.
+            </p>
+
+            <pre class="bash fragment"><code data-trim>
+              $ yarn add tailwindcss@npm:@tailwindcss/postcss7-compat postcss@^7 autoprefixer@^9
+            </code></pre>
+          </section>
+
+          <section>
+            <div class="fragment">
+              <p style="font-size: 2rem">
+                In the future, if Rails gets the PostCSS compatibility issue fixed, we can easily
+                upgrade by running these two commands
+              </p>
+              <pre class="bash"><code data-trim>
+                $ yarn remove tailwindcss @tailwindcss/postcss7-compat
+                $ yarn add tailwindcss@latest postcss@latest autoprefixer@latest
+              </code></pre>
+            </div>
+          </section>
+
+          <section>
+            <p class="fragment" style="font-size: 2rem">
+              Next, let's create our Tailwind config file
+            </p>
+
+            <pre class="bash fragment"><code data-trim>
+              $ npx tailwindcss init
+            </code></pre>
+
+            <p class="fragment" style="font-size: 2rem">
+              This will create a tailwind.config.js file in the root of our app
+            </p>
+
+            <p class="fragment" style="font-size: 2rem">
+              To keep things organized, I like to move this config to into
+              <code style="color: red">app/javascript/stylesheets</code>
+            </p>
+          </section>
+
+          <section>
+            <p class="fragment" style="font-size: 2rem" style="font-size: 2rem">
+              Next, let's tell our app to use Tailwind
+            </p>
+
+            <pre class="scss fragment"><code data-trim>
+              /* app/javascript/stylesheets/application.scss */
+
+              @import "tailwindcss/base";
+              @import "tailwindcss/components";
+              /* Add any custom CSS here */
+              @import "tailwindcss/utilities";
+            </code></pre>
+
+            <p class="fragment" style="font-size: 2rem">
+              Add any custom CSS after the components import but before the utilities import
+            </p>
+          </section>
+
+          <section>
+            <p class="fragment" style="font-size: 2rem">
+              By default, our Rails app is looking for assets using the Asset Pipeline. We need to
+              tell it to include our <code style="color: red">application.scss</code> we just
+              created.
+            </p>
+
+            <pre class="javascript fragment"><code data-trim>
+              // app/javascript/packs/application.js
+
+              import "stylesheets/application"
+            </code></pre>
+          </section>
+
+          <section>
+            <p class="fragment" style="font-size: 2rem">
+              Let's update our <code style="color: red">application.html.erb</code> layout to pick
+              up that import
+            </p>
+
+            <pre class="erb fragment"><code data-trim>
+              <%# application.html.erb %>
+
+              <%= stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+            </code></pre>
+          </section>
+
+          <section>
+            <p class="fragment" style="font-size: 2rem">
+              Almost there! Now we need to configure PostCSS to let it know we are using Tailwind as
+              a plugin and where to find it so it.
+            </p>
+            <p class="fragment" style="font-size: 2rem">
+              By adding this, PostCSS will purge all of our unused classes in production and add
+              vendor prefixes to our styles using autoprefixer
+            </p>
+
+            <pre class="javascript fragment"><code data-trim>
+              // postcss.config.js
+              
+              module.exports = {
+                plugins: [
+                  require("tailwindcss")("./app/javascript/stylesheets/tailwind.config.js"),
+                  require("postcss-import"),
+                  require("postcss-flexbugs-fixes"),
+                  require("postcss-preset-env")({
+                    autoprefixer: {
+                      flexbox: "no-2009",
+                    },
+                    stage: 3,
+                  }),
+                ],
+              }
+            </code></pre>
+          </section>
+
+          <section>
+            <p class="fragment">
+              Last step! We need to make sure to specify which files to purge unused CSS
+            </p>
+
+            <pre class="javascript fragment"><code data-trim>
+              // app/javascript/stylesheets/tailwind.config.js
+
+              module.exports = {
+                purge: [
+                  "./app/**/*.html.erb",
+                  "./app/helpers/**/*.rb",
+                  "./app/javascript/**/*.js"
+                ],
+                darkMode: false, // or 'media' or 'class'
+                theme: {
+                  extend: {},
+                },
+                variants: {
+                  extend: {},
+                },
+                plugins: [],
+              }
+            </code></pre>
+          </section>
+        </section>
+      </div>
+    </div>
+
+    <script src="dist/reveal.js"></script>
+    <script src="plugin/notes/notes.js"></script>
+    <script src="plugin/markdown/markdown.js"></script>
+    <script src="plugin/highlight/highlight.js"></script>
+    <script>
+      // More info about initialization & config:
+      // - https://revealjs.com/initialization/
+      // - https://revealjs.com/config/
+      Reveal.initialize({
+        hash: true,
+
+        // Learn about plugins: https://revealjs.com/plugins/
+        plugins: [RevealMarkdown, RevealHighlight, RevealNotes]
+      });
+    </script>
+  </body>
+</html>
